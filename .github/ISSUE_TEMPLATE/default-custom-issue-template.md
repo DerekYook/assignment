@@ -1,0 +1,16 @@
+---
+name: Default Custom issue template
+about: Default issue template
+title: ''
+labels: ''
+assignees: ''
+
+---
+
+### 기능
+Ex) 기능 설명
+
+### 할 일
+- [ ] Job1
+- [ ] Job2
+- [ ] Job3
