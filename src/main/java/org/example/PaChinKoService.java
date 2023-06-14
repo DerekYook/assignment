@@ -25,49 +25,61 @@ public class PaChinKoService {
     public static void main(String[] args) throws ParseException {
         // 테스트 데이터
         List<PaChinKoService> example = new ArrayList<>();
-        example.add(new PaChinKoService("A",dnt.parse("2023/06/01")));
-        example.add(new PaChinKoService("A",dnt.parse("2023/06/01")));
-        example.add(new PaChinKoService("A",dnt.parse("2023/07/07")));
-        example.add(new PaChinKoService("A",dnt.parse("2023/07/07")));
-        example.add(new PaChinKoService("B",dnt.parse("2023/07/07")));
-        example.add(new PaChinKoService("A",dnt.parse("2023/07/07")));
-        example.add(new PaChinKoService("A",dnt.parse("2023/07/07")));
-        example.add(new PaChinKoService("B",dnt.parse("2023/07/07")));
-        example.add(new PaChinKoService("A",dnt.parse("2023/07/07")));
-        example.add(new PaChinKoService("A",dnt.parse("2023/07/07")));
-        example.add(new PaChinKoService("A",dnt.parse("2023/07/07")));
-        example.add(new PaChinKoService("B",dnt.parse("2023/07/07")));
-
+        try {
+            example.add(new PaChinKoService("A", dnt.parse("2023/06/01")));
+            example.add(new PaChinKoService("A", dnt.parse("2023/06/01")));
+            example.add(new PaChinKoService("A", dnt.parse("2023/07/07")));
+            example.add(new PaChinKoService("A", dnt.parse("2023/07/07")));
+            example.add(new PaChinKoService("B", dnt.parse("2023/07/07")));
+            example.add(new PaChinKoService("A", dnt.parse("2023/07/07")));
+            example.add(new PaChinKoService("A", dnt.parse("2023/07/07")));
+            example.add(new PaChinKoService("B", dnt.parse("2023/07/07")));
+            example.add(new PaChinKoService("A", dnt.parse("2023/07/07")));
+            example.add(new PaChinKoService("A", dnt.parse("2023/07/07")));
+            example.add(new PaChinKoService("A", dnt.parse("2023/07/07")));
+            example.add(new PaChinKoService("B", dnt.parse("2023/07/07")));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         System.out.println(dnt.format(today));
+        System.out.println("Let's start PachinKoService");
         Scanner scanner = new Scanner(System.in);
         while (true) {
             String input = scanner.nextLine();
             String command = input.toLowerCase();
+            // DRAW
             if (command.equals("draw")) {
-                // DRAW
                 // 금액이 없을 때
                 if (wallet <= 0) {
                     System.out.println("please re-fill money");
                 } else {
-                // 금액이 있을 때 -> 몇번
+                    // 금액이 있을 때 -> 몇번
                     System.out.println("How many times do you want to try? : ");
                     Integer attemptTime = scanner.nextInt();
-                    for(int i = 1 ; i <= attemptTime ; i++) {
-                        draw();
-                        example.get();
-                        checkExpiredTime();
-                        if () {
-                            System.out.println("You Got Prize!!");
+                    for (int i = 1; i <= attemptTime; i++) {
+                        if (wallet - (fee * (attemptTime-i)) >= 0) {
+                            // A, B, 꽝 상품 경우, 유통기한 확인
+                            PaChinKoService paChinKoService = example.get(i-1);
+                            boolean expired = paChinKoService.checkExpiredTime();
+                            if (expired) {
+                                System.out.println("You Got Prize!! : " + draw());
+                            } else {
+                                System.out.println("The ExpiredDate is out of Limit");
+                                attemptTime--;
+                            }
                         } else {
-                            System.out.println("The ExpiredDate is out of Limit");
-                            attemptTime--;
+                            // 시도가 오버되었을 때
+                            System.out.println("check your wallet");
                         }
                     }
                 }
             } else if (command.equals("charge")) {
                 // 충전
                 wallet += charge;
+                System.out.println(wallet);
+            } else if (command.equals("wallet")) {
+                // 잔액 확인
                 System.out.println(wallet);
             } else {
                 System.out.println("Please Type Right Command");
@@ -83,7 +95,7 @@ public class PaChinKoService {
         // A -> B -> 꽝
         if (probability < 0.9) {
             return "A";
-        } else if (bCount < 3 && probability < 0.1) {
+        } else if (bCount < 3) {
             bCount++;
             return "B";
         } else {

@@ -16,6 +16,7 @@ public class ExchangeService {
     private static String command = action[0].toUpperCase();
 
     public static void main(String[] args) {
+        productMap.put("aaaaaa",10);
         if (command.equals("CHECK")) {
             // check : 현재 재고량 확인
             // check + [상품 코드]
