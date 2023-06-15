@@ -58,15 +58,23 @@ public class PaChinKoService {
                     System.out.println("How many times do you want to try? : ");
                     Integer attemptTime = scanner.nextInt();
                     for (int i = 1; i <= attemptTime; i++) {
-                        if (wallet - (fee * (attemptTime-i)) >= 0) {
+                        if (wallet - (fee * (attemptTime - i)) >= 0) {
                             // A, B, 꽝 상품 경우, 유통기한 확인
-                            PaChinKoService paChinKoService = example.get(i-1);
-                            boolean expired = paChinKoService.checkExpiredTime();
-                            if (expired) {
-                                System.out.println("You Got Prize!! : " + draw());
-                            } else {
-                                System.out.println("The ExpiredDate is out of Limit");
-                                attemptTime--;
+//                            // 테스트케이스 반복(무제한)
+//                             PaChinKoService paChinKoService = example.get(1% example.size());
+                            // 테스트케이스 개수 만큼만
+                            try {
+                                PaChinKoService paChinKoService = example.get(i - 1);
+                                boolean expired = paChinKoService.checkExpiredTime();
+                                String result = draw();
+                                if (expired) {
+                                    System.out.println("You Got Prize!! : " + result);
+                                } else {
+                                    System.out.println("The ExpiredDate is out of Limit");
+                                    attemptTime--;
+                                }
+                            } catch (Exception e){
+                                System.out.println("boom");
                             }
                         } else {
                             // 시도가 오버되었을 때
