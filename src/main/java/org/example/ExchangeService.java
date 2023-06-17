@@ -24,6 +24,8 @@ public class ExchangeService {
         productMap.put("012345677", 20);
         productMap.put("012345676", 10);
 
+        System.out.println("=====ExchangeService=====");
+
         // 고객 입력
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
@@ -45,14 +47,13 @@ public class ExchangeService {
             // claim + [상점 코드] + [상품 코드]
             if (verifyStoreCode(action)) {
                 // 상점 재고 확인
+                stock = productMap.get(action[2]);
                 if (verifyProductCode(action)) {
                     // 재고확인
-                    stock = productMap.get(action[2]);
                     System.out.println("Products remained : " + stock);
                 }
                 // case 1 : 차감
-                stock = productMap.get(productCode);
-                productMap.put(productCode, stock - 1);
+                productMap.put(action[2], stock - 1);
                 // case 2 : 불가 안내
                 if (stock <= 0) {
                     System.out.println("There is no stock here.");
