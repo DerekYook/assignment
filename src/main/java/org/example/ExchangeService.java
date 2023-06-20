@@ -1,6 +1,10 @@
 package org.example;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 public class ExchangeService {
 
@@ -31,7 +35,7 @@ public class ExchangeService {
         // 고객 입력
         Scanner scanner = new Scanner(System.in);
 
-        while(true) {
+        while (true) {
             String input = scanner.nextLine();
             String[] action = input.split(" ");
             String command = action[0].toUpperCase();
